@@ -1,0 +1,45 @@
+<mat-card style="max-width: 800px; width: 100%;">
+  <mat-card-header>
+    <mat-card-title style="font-size: 2rem; font-weight: bold;">Items List</mat-card-title>
+    <span style="flex: 1 1 auto;"></span>
+    <a mat-button routerLink="/dashboard">
+      <mat-icon>arrow_back</mat-icon>
+      Back to Dashboard
+    </a>
+  </mat-card-header>
+  
+  <mat-card-content style="min-height: 400px;">
+    @switch (status()) {
+      @case ('loading') {
+        <div style="display: flex; align-items: center; justify-content: center; height: 400px;">
+            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
+      }
+      @case ('error') {
+        <div style="display: flex; align-items: center; justify-content: center; height: 400px;">
+          <div style="text-align: center; color: #b91c1c; border: 1px solid #fca5a5; background-color: #fde2e2; padding: 1rem; border-radius: 4px;">
+            <strong>Error!</strong>
+            <span style="display: block;">{{ error() }}</span>
+          </div>
+        </div>
+      }
+      @case ('loaded') {
+        <mat-list>
+          @for (item of items(); track item.id; let i = $index) {
+            <mat-list-item>
+              <h3 matListItemTitle>{{ item.name }}</h3>
+              <p matListItemLine>{{ item.description }}</p>
+            </mat-list-item>
+            @if (i < items().length - 1) {
+              <mat-divider></mat-divider>
+            }
+          } @empty {
+            <div style="text-align: center; padding: 5rem 0; color: #6b7280;">
+              <p>No items found.</p>
+            </div>
+          }
+        </mat-list>
+      }
+    }
+  </mat-card-content>
+</mat-card>
