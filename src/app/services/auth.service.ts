@@ -3,7 +3,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, tap, catchError, of, map } from 'rxjs';
-import { CookieService } from './cookie.service';
+import { CookiesService } from './cookie.service';
 import { User } from '../models/user.model';
 import { API_ENDPOINTS } from '../config/api.config';
 
@@ -16,7 +16,7 @@ const USER_INFO_KEY = 'user_info';
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private cookieService = inject(CookieService);
+  private cookieService = inject(CookiesService);
 
   currentUser = signal<User | null>(this.getUserFromCookie());
   isAuthenticated = computed(() => !!this.currentUser());

@@ -2,12 +2,12 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { CookieService } from '../services/cookie.service';
+import { CookiesService } from '../services/cookie.service';
 
 export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  const cookieService = inject(CookieService);
+  const cookieService = inject(CookiesService);
 
   if (cookieService.get('auth_token')) {
     if(!authService.currentUser()){
@@ -20,6 +20,6 @@ export const authGuard: CanActivateFn = () => {
     }
     return true;
   }
-  
+
   return router.parseUrl('/login');
 };

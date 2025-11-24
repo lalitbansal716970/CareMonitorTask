@@ -4,14 +4,14 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { CookieService } from './cookie.service';
+import { CookiesService } from './cookie.service';
 import { API_ENDPOINTS } from '../config/api.config';
 import { User } from '../models/user.model';
 
 describe('AuthService', () => {
   let service: AuthService;
   let httpTestingController: HttpTestingController;
-  let cookieServiceSpy: jasmine.SpyObj<CookieService>;
+  let cookieServiceSpy: jasmine.SpyObj<CookiesService>;
   let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('AuthService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         AuthService,
-        { provide: CookieService, useValue: cookieSpy },
+        { provide: CookiesService, useValue: cookieSpy },
         { provide: Router, useValue: routerSpyObj },
       ],
     });
@@ -30,7 +30,7 @@ describe('AuthService', () => {
     service = TestBed.inject(AuthService);
 
     httpTestingController = TestBed.inject(HttpTestingController);
-    cookieServiceSpy = TestBed.inject(CookieService) as jasmine.SpyObj<CookieService>;
+    cookieServiceSpy = TestBed.inject(CookiesService) as jasmine.SpyObj<CookiesService>;
     routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
   });
 

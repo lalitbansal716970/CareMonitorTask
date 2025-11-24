@@ -1,14 +1,14 @@
 /// <reference types="jasmine" />
 
 import { TestBed } from '@angular/core/testing';
-import { CookieService } from './cookie.service';
+import { CookiesService } from './cookie.service';
 
 describe('CookieService', () => {
-  let service: CookieService;
+  let service: CookiesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CookieService);
+    service = TestBed.inject(CookiesService);
     // Clear cookies before each test
     document.cookie.split(';').forEach(c => {
       document.cookie = c.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
